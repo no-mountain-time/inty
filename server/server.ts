@@ -1,15 +1,15 @@
-declare var require: any
-declare var process: any
-import express, {Express, Request, Response} from 'express'
-import cors from 'cors'
-require('dotenv').config()
+import express from 'express';
+import cors from 'cors';
+import { config } from 'dotenv'
 
-const app: Express = express()
-const port: number = process.env.PORT
+config();
 
-app.use(cors({origin: 'localhost:3000'}))
-app.use(express.json())
+const app = express();
+const port = process.env.PORT ? parseInt(process.env.PORT) : 8080;
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server listening on ${process.env.PORT}`)
+app.use(cors({origin: 'http://localhost:3000'}));
+app.use(express.json());
+
+app.listen(port, () => {
+    console.log(`Server listening on ${port}`);
 });
